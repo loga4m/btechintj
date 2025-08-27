@@ -21,6 +21,9 @@ IntVec::~IntVec() {
 void IntVec::deallocate_data() {
   if (_data) {
     delete[] _data;
+    _data = nullptr;
+    _size = 0;
+    _capacity = 0;
   }
 }
 
