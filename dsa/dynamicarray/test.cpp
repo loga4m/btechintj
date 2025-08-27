@@ -29,6 +29,7 @@ void print_vec_info(IntVec &vec) {
 
 int main(void) {
   IntVec vec;
+  std::cout << vec.data() << std::endl;
   print_vec_info(vec);
 
   vec.push_back(10);
@@ -65,6 +66,8 @@ int main(void) {
 
   vec.insert(4, 30);
   print_vec_info(vec);
+
+  vec.at(100);
 
   return 0;
 }

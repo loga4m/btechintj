@@ -6,6 +6,7 @@ private:
   int *_data;
   int _size;
   int _capacity;
+  void deallocate_data();
   void resize(int new_capacity);
   int get_new_capacity_value();
   void validate_index(int index);
