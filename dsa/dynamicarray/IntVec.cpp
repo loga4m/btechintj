@@ -4,9 +4,13 @@
 
 IntVec::IntVec() : _data{nullptr}, _size{0}, _capacity{0} {};
 
-IntVec::IntVec(int *arr) {
+IntVec::IntVec(int *arr, int size) {
   if (arr == nullptr) {
     throw std::invalid_argument("Array cannot be null");
+  }
+  resize(size);
+  for (int i = 0; i < size; i++) {
+    _data[i] = arr[i];
   }
 }
 
@@ -22,7 +26,6 @@ void IntVec::deallocate_data() {
 
 void IntVec::resize(int new_capacity) {
   if (new_capacity < 0) {
-    deallocate_data();
     throw std::runtime_error("Capacity cannot be negative");
   }
 
@@ -47,7 +50,6 @@ int IntVec::get_new_capacity_value() {
 
 void IntVec::validate_index(int index) {
   if (index < 0 || index >= _size) {
-    deallocate_data();
     throw std::out_of_range("Index out of range");
   }
 }
@@ -87,7 +89,6 @@ bool IntVec::is_empty() { return _size == 0; }
 
 int IntVec::front() {
   if (is_empty()) {
-    deallocate_data();
     throw std::runtime_error("Illegal access to empty array");
   }
   return _data[0];
@@ -95,7 +96,6 @@ int IntVec::front() {
 
 int IntVec::back() {
   if (is_empty()) {
-    deallocate_data();
     throw std::runtime_error("Illegal access to empty array");
   }
   return _data[_size - 1];
@@ -121,7 +121,6 @@ void IntVec::push_front(int value) {
 
 int IntVec::pop_back() {
   if (_size == 0) {
-    deallocate_data();
     throw std::runtime_error("No element to remove.");
   }
   int value = _data[--_size];
