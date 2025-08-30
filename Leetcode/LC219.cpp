@@ -16,19 +16,3 @@ public:
     }
 };
 
-/*
-Time complexity:
-    loop -- O(n), if no solution is found
-    unordered_map::insert, at -- 
-        O(1), O(k) if hash collisions occur,
-        where k <= n.
-        We treat it as amortized.
-
-    Overall: O(n)
-
-Space complexity:
-    unordered_map -- O(n) -- if not solution is found
-    loop -- O(1)
-
-    Overall: O(n)
-*/
