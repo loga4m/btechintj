@@ -1,6 +1,6 @@
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
-        buckets = {}
+        buckets: dict[int, int] = {}
 
         for i in range(0, len(nums)):
             if i > indexDiff:
