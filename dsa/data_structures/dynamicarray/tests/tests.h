@@ -5,6 +5,7 @@ void SizeT();
 void CapacityT();
 void DataT();
 void IsEmptyT();
+void ContainerEqualT();
 
 void FrontT();
 void BackT();

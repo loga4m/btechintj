@@ -8,14 +8,11 @@ IntVec::IntVec() : _data{nullptr}, _size{0}, _capacity{0} {};
 IntVec::IntVec(int *arr, size_t size)
 {
     if (arr == nullptr)
-    {
         throw std::invalid_argument("Array cannot be null");
-    }
+
     resize(size);
     for (int i = 0; i < size; i++)
-    {
         _data[i] = arr[i];
-    }
 }
 
 IntVec::~IntVec()
@@ -37,19 +34,15 @@ void IntVec::deallocate_data()
 void IntVec::resize(size_t new_capacity)
 {
     if (new_capacity < 0)
-    {
         throw std::runtime_error("Capacity cannot be negative");
-    }
 
-    if (new_capacity == _capacity)
-        return;
+    if (new_capacity == _capacity) return;
+
     int *new_arr = new int[new_capacity];
     size_t new_size = (new_capacity > _size) ? _size : new_capacity;
 
     for (int i = 0; i < new_size; i++)
-    {
         new_arr[i] = _data[i];
-    }
 
     deallocate_data();
     _data = new_arr;
@@ -57,36 +50,30 @@ void IntVec::resize(size_t new_capacity)
     _size = new_size;
 }
 
-size_t IntVec::get_new_capacity_value()
+size_t IntVec::get_new_capacity_value() const
 {
-    return (_capacity == 0) ? 1 : (_capacity * 2);
+    if (_capacity == 0) return 1;
+    return _capacity * 2;
 }
 
-void IntVec::validate_index(int index)
+void IntVec::validate_index(int index) const
 {
     if (index < 0 || index >= _size)
-    {
         throw std::out_of_range("Index out of range");
-    }
 }
 
 void IntVec::get_k_free_places_from(int index, int k)
 {
-    if (k <= 0)
-        return;
+    if (k <= 0) return;
 
     if (index != 0)
-    {
         validate_index(index);
-    }
 
     if (_size + k >= _capacity)
     {
         size_t new_capacity = get_new_capacity_value();
         if (new_capacity - _size < k)
-        {
             new_capacity += k;
-        }
         resize(new_capacity);
     }
 
@@ -100,45 +87,41 @@ void IntVec::get_k_free_places_from(int index, int k)
     }
 }
 
-int *IntVec::data()
+int *IntVec::data() const
 {
     return _data;
 }
 
-size_t IntVec::size()
+size_t IntVec::size() const
 {
     return _size;
 }
 
-size_t IntVec::capacity()
+size_t IntVec::capacity() const
 {
     return _capacity;
 }
 
-bool IntVec::is_empty()
+bool IntVec::is_empty() const
 {
     return _size == 0;
 }
 
-int IntVec::front()
+int IntVec::front() const
 {
     if (is_empty())
-    {
         throw std::runtime_error("Illegal access to empty array");
-    }
     return _data[0];
 }
 
-int IntVec::back()
+int IntVec::back() const
 {
     if (is_empty())
-    {
         throw std::runtime_error("Illegal access to empty array");
-    }
     return _data[_size - 1];
 }
 
-int IntVec::at(int index)
+int IntVec::at(int index) const
 {
     validate_index(index);
     return _data[index];
@@ -147,9 +130,7 @@ int IntVec::at(int index)
 void IntVec::push_back(int value)
 {
     if (_size + 1 >= _capacity)
-    {
         resize(get_new_capacity_value());
-    }
     _data[_size++] = value;
 }
 
@@ -163,9 +144,8 @@ void IntVec::push_front(int value)
 int IntVec::pop_back()
 {
     if (_size == 0)
-    {
         throw std::runtime_error("No element to remove.");
-    }
+
     int value = _data[--_size];
     return value;
 }
@@ -203,14 +183,9 @@ bool IntVec::remove(int value)
     return true;
 }
 
-int IntVec::find(int value)
+int IntVec::find(int value) const
 {
     for (size_t i = 0; i < _size; i++)
-    {
-        if (_data[i] == value)
-        {
-            return i;
-        }
-    }
+        if (_data[i] == value) return i;
     return -1;
 }

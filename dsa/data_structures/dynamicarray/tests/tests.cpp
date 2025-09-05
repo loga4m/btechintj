@@ -29,7 +29,6 @@ void CapacityT()
 {
     IntVec myVec;
     std::vector<int> stdVec;
-
     EXPECT_EQ(stdVec.capacity(), myVec.capacity());
 
     // add one element
@@ -53,8 +52,40 @@ void CapacityT()
 
 void DataT() {
     IntVec myVec;
+    std::vector<int> stdVec;
+
+    // nullptr test
     EXPECT_EQ(myVec.data(), static_cast<int*>(nullptr));
+
+    // std::vector::data test
+    EXPECT_EQ_ARRAY(
+        stdVec.data(),
+        stdVec.size(),
+        myVec.data(),
+        myVec.size()
+    );
+
+    // Adding some elements
+    myVec.push_back(10);
+    stdVec.push_back(10);
+
+    EXPECT_EQ(
+        stdVec.front(),
+        myVec.front()
+    );
+
+    EXPECT_EQ(
+        stdVec.back(),
+        myVec.back()
+    );
+
+    // Removing an element
+    myVec.pop_back();
+    stdVec.pop_back();
+
+    EXPECT_EQ_CONTAINER(stdVec, myVec);
 }
+
 
 
 
