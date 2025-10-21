@@ -169,6 +169,13 @@ int IntVec::delete_at(int index)
     int value = _data[--_size]; // since the target element
                                 // is moved to the end, decrement
     return value;
+
+    /*
+     * Another implementation:
+     *      don't move removal element in the loop
+     *      instead, save it to a variable before
+     *      the loop and return that value.
+     */
 }
 
 bool IntVec::remove(int value)
